@@ -16,7 +16,7 @@ export default function Store(){
     }, [])
     return(
         <Conteiner>
-            {data.length && data.map(m=> <MangaCard mangaInfo={m}></MangaCard>)}
+            {data.length ? data.map(m=> <MangaCard key={m.id} mangaInfo={m}></MangaCard>): "Nehum mangá disponível no momento"}
         </Conteiner>
     )
 }
@@ -27,5 +27,5 @@ const Conteiner = styled.div`
     justify-content: center;
     margin-top: 100px;
     width: 100%;
-    padding: 0 150px;
+    padding: 0 10px;
 `
