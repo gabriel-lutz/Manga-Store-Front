@@ -32,7 +32,7 @@ const Conteiner = styled.div`
     right: 0;
     padding: 0 50px;
     height: 100px;
-    background: #222222;
+    background: #151515;
     color:white;
     z-index:1;
 
