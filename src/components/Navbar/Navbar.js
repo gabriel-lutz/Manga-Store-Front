@@ -16,6 +16,7 @@ export default function Navbar(){
                 </CartLogoutWrapper>
 
             </UserMenu>
+            <SearchBar></SearchBar>
             <PageName> Mangá Store </PageName>
         </Conteiner>
     )
@@ -26,11 +27,14 @@ const Conteiner = styled.div`
     justify-content: space-between;
     align-items: center;
     position: fixed;
+    top: 0;
+    left:0;
+    right: 0;
     padding: 0 50px;
     height: 100px;
-    width:100%;
-    background: #474747;
+    background: #222222;
     color:white;
+    z-index:1;
 
 `
 const UserMenu = styled.div`
@@ -66,4 +70,12 @@ const VerticalSeparator = styled.div`
 `
 
 const UserName = styled.div`
+    font-size: 18px;
+`
+
+const SearchBar = styled.div`
+    width: 300px;
+    height: 30px;
+    background-color: white;
+    border-radius: 5px;
 `
