@@ -44,8 +44,6 @@ const Info= styled.div`
     display:flex;
     flex-direction:column;
     justify-content: space-between;
-    overflow-y: scroll;
-    white-space: nowrap;
     span{
         color:#56AD6E;
     }

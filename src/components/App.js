@@ -25,10 +25,8 @@ export default function App(){
                     <Route path="/sign-up" exact component={SignUp}/>
                     <Route path="/cart" exact component={Cart}/>
                     <Route path="/main">
-                        <Store>
-                        </Store>
-                        <Navbar>
-                        </Navbar>
+                        <Store/>
+                        <Navbar store={true}/>
                     </Route>
 
                 </Switch>

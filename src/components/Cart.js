@@ -2,12 +2,15 @@ import styled from "styled-components"
 import {useState, useContext, useEffect} from "react"
 import UserContext from "../contexts/UserContext"
 import axios from "axios"
+import {useHistory} from "react-router-dom"
 
 import CartItem from "./CartItem"
+import Navbar from "./Navbar/Navbar"
 
 export default function Cart() {
     const {userInfo} = useContext(UserContext)
     const [userCart,setUserCart]=useState([])
+    const history = useHistory()
 
     useEffect(()=>{
         const config = {
@@ -27,13 +30,12 @@ export default function Cart() {
     function removeFromCart(cartId,name){
         if(!window.confirm(`Confirm removing ${name} from cart?`)){return}
 
-        const body = {cartId, teste:"rodrigo"}
         const config = {
             headers:{
                 Authorization:`Bearer ${userInfo.token}`
         }}
         console.log(config)
-        axios.delete(`http://localhost:4000/cart-remove${cartId}`,config).then((r)=>{
+        axios.delete(`http://localhost:4000/cart${cartId}`,config).then((r)=>{
             console.log(r)
             setUserCart(userCart.filter(i=> i.cartId===cartId? false:true))
         }).catch((e)=>{
@@ -43,22 +45,42 @@ export default function Cart() {
     }   
 
     function checkout(){
-        if(!window.confirm(`Confirm purchase of ${userCart.length} itens?`)){return}
-        console.log("checkout")
-        //axios.post(`http://localhost:4000/check-out`)
+        if(!window.confirm(`Confirm purchase of ${userCart.length} itens for R$ ${String(userCart.reduce((t,i)=>t+i.price,0)/100).replace(".",",")}?`)){return}
+        
+        const config = {
+            headers:{
+                Authorization:`Bearer ${userInfo.token}`
+        }}
+        axios.post(`http://localhost:4000/check-out`,{},config).then((r)=>{
+            console.log(r)
+            history.push('/main')
+            alert("Purchase completed! Redirected do store!")
+        }).catch((e)=>{
+            console.log(e)
+        })
     }
 
     return (
+        <>
+        <Navbar store={false}/>
         <Wrapper>
-            <h1>CART</h1>
+            <h1>YOUR CART</h1>
             {userCart.map(i=> <CartItem key={i.cartId} cartId={i.cartId} name={i.name} cover={i.imageUrl} category={i.categoryName} price={String(i.price/100).replace(".",",")} removeFromCart={removeFromCart}/>)}
-            <Footer>
-                <ConfirmButton onClick={()=>checkout()}>
-                    <p>Total: R$ {String(userCart.reduce((t,i)=>t+i.price,0)/100).replace(".",",")}</p>
-                    <span>CONFIRM</span>
-                </ConfirmButton>
-            </Footer>
+            {userCart.length?
+                <Footer>
+                    <ConfirmButton onClick={()=>checkout()}>
+                        <p>Total: R$ {String(userCart.reduce((t,i)=>t+i.price,0)/100).replace(".",",")}</p>
+                        <span>CONFIRM</span>
+                    </ConfirmButton>
+                </Footer>:
+                <>
+                    <p>You dont have any itens in your cart!</p>
+                    <p>click <span onClick={()=>history.push('/main')}>here</span> to go back to the store</p>
+                    
+                </>
+            }
         </Wrapper>
+        </>
     )
 }
 
@@ -69,12 +91,20 @@ const Wrapper= styled.div`
     background-color:#dbdbdb;
     display: flex;
     flex-direction: column;
+    align-items: center;
     gap:20px;
+    h1{
+        font-family: 'Fredericka the Great', cursive;
+        font-size: 25px;
+    }
+    span{
+        color:#56AD6E;
+    }
 `
 
 const Footer= styled.div`
     width: 100%;
-    background-color: white;
+    background-color: #dbdbdb;
     height: 100px;
     position:fixed;
     left:0;
@@ -82,7 +112,7 @@ const Footer= styled.div`
     display:flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 0px 10px black;
+    box-shadow: 0 0px 10px #474747;
 `
 
 const ConfirmButton = styled.button`
