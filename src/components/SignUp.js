@@ -35,7 +35,7 @@ export default function SignUp() {
             <FormWrapper>
                 <TitleWrapper>
                     <Title>
-                        Manga Store
+                        Mangá Store
                     </Title>
                 </TitleWrapper>
                 <Form onSubmit={register}>

@@ -40,7 +40,7 @@ export default function SignIn() {
             <FormWrapper>
                 <TitleWrapper>
                     <Title>
-                        Manga Store
+                        Mangá Store
                     </Title>
                 </TitleWrapper>
                 <Form onSubmit={login}>

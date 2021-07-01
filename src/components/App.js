@@ -7,6 +7,7 @@ import Store from "./Store/Store"
 
 import SignUp from "./SignUp"
 import SignIn from "./SignIn"
+import Cart from "./Cart"
 
 export default function App(){
     const [userInfo, setUserInfo] = useState(
@@ -22,13 +23,12 @@ export default function App(){
                 <Switch>
                     <Route path="/" exact component={SignIn}/>
                     <Route path="/sign-up" exact component={SignUp}/>
+                    <Route path="/cart" exact component={Cart}/>
                     <Route path="/main">
-                        <Store>
-                        </Store>
-                        <Navbar>
-
-                        </Navbar>
+                        <Store/>
+                        <Navbar store={true}/>
                     </Route>
+
                 </Switch>
             </Router>
         </UserContext.Provider>

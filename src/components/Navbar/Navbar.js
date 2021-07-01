@@ -1,23 +1,26 @@
 import styled from "styled-components"
 import {FaShoppingCart, FaSignOutAlt} from "react-icons/fa"
-import {useContext, useEffect} from "react"
+import {useContext, useEffect,useState} from "react"
 import UserContext from "../../contexts/UserContext"
 import axios from "axios"
 import {useHistory} from "react-router-dom"
-export default function Navbar(){
+
+export default function Navbar({store}){
     const {userInfo, setUserInfo} = useContext(UserContext)
     const history = useHistory()
+    const [cartItens,setCartItens]= useState(0)
 
     useEffect(()=>{
         const config = {headers:{Authorization:`Bearer ${userInfo.token}`}}
         const promisse = axios.get("http://localhost:4000/cart", config )
         promisse.then(data=>{
             setUserInfo({...userInfo, cart: data.data})
+            setCartItens(data.data.length)
         })
         promisse.catch(()=>{
             alert("algo deu errado")
         })
-    })
+    },[userInfo,setUserInfo])
 
     function logout(){
         const header = {
@@ -29,7 +32,7 @@ export default function Navbar(){
             history.push('/')
         })
     }
-
+    //<p onClick={()=>history.push('/cart')}>{!userInfo.cart?.length && "0"} itens</p>
     return(
         <Conteiner>
             <UserMenu>
@@ -40,8 +43,13 @@ export default function Navbar(){
                 <CartLogoutWrapper>
                     <FaSignOutAlt onClick={logout} style={{cursor:'pointer'}}></FaSignOutAlt>
                     <VerticalSeparator></VerticalSeparator>
-                        <FaShoppingCart onClick={()=>history.push('/cart')}></FaShoppingCart>
-                        <p onClick={()=>history.push('/cart')}>{!userInfo.cart?.length && "0"} itens</p>
+                        {store?
+                            <>
+                                <FaShoppingCart onClick={()=>history.push('/cart')}></FaShoppingCart>
+                                <p onClick={()=>history.push('/cart')}>{cartItens} itens</p>
+                            </>:
+                            <p onClick={()=>history.push('/main')}>Voltar para loja</p>
+                        }
                 </CartLogoutWrapper>
             </UserMenu>
             <PageName> Mangá <br/>Store </PageName>
