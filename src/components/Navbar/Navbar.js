@@ -9,7 +9,6 @@ export default function Navbar({store}){
     const {userInfo,cartItens,setCartItens} = useContext(UserContext)
     const history = useHistory()
 
-
     useEffect(()=>{
         const config = {headers:{Authorization:`Bearer ${userInfo.token}`}}
         const promisse = axios.get("http://localhost:4000/cart", config )
@@ -19,7 +18,7 @@ export default function Navbar({store}){
         promisse.catch(()=>{
             alert("algo deu errado")
         })
-    },[userInfo.token])
+    },[userInfo.token,setCartItens])
 
     function logout(){
         const header = {
@@ -73,8 +72,8 @@ const Conteiner = styled.div`
     height: 100px;
     background: #151515;
     color:white;
-    z-index:1;
-
+    z-index:2;
+    box-shadow: 0 0px 10px #474747;
 `
 const UserMenu = styled.div`
     display: flex;
