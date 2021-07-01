@@ -31,6 +31,12 @@ export default function Navbar({store}){
             localStorage.clear()
             history.push('/')
         })
+        promisse.catch((data)=>{
+            if(data.response.status === 401){
+                localStorage.clear()
+                history.push('/')
+            }
+        })
     }
     //<p onClick={()=>history.push('/cart')}>{!userInfo.cart?.length && "0"} itens</p>
     return(
