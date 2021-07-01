@@ -1,11 +1,27 @@
 import styled from "styled-components"
-import {FaCartPlus, FaPlus, FaTimes} from "react-icons/fa"
-import { useState } from "react"
+import {FaCartPlus, FaPlus, FaTimes,FaCheck} from "react-icons/fa"
+import {useContext, useState} from "react"
+import UserContext from "../../contexts/UserContext"
 import Modal from 'react-modal';
+import axios from "axios"
 
 export default function MangaCard({mangaInfo}){
     const [showModal, setShowModal] = useState(false)
-    const {name, price, categoryName, description, imageUrl} = mangaInfo
+    const {id,name, price, categoryName, description, imageUrl} = mangaInfo
+    const [showCheck, setShowCheck] = useState(false)
+
+    const {userInfo} = useContext(UserContext)
+    function addToCart(){
+        const config = {headers:{Authorization:`${userInfo.token}`}}
+        const promisse = axios.post(`http://localhost:4000/addproduct/${id}`,{}, config )
+        promisse.then(()=>{
+            setShowCheck(!showCheck)
+            setTimeout(()=>{
+                setShowCheck(false)
+            }, 2000)
+        })
+    }
+
     return(
         <Card>
             <img src={imageUrl} alt={name} onClick={()=>{setShowModal(true)}}></img>
@@ -14,27 +30,35 @@ export default function MangaCard({mangaInfo}){
                     overlayClassName="Overlay"
                     ariaHideApp={false}>
                 <ModalContent>
-                    <img src={imageUrl} alt={name} onClick={()=>{setShowModal(true)}}></img>
-                    <ModalInfo>
-                        <FaTimes onClick={()=>{setShowModal(false)}}></FaTimes>
-                        <p>{name}</p>
-                        <p>{description}</p>
-                        <p>Categoria: {categoryName}</p>
-                        <PricePlus>
-                            <FaCartPlus></FaCartPlus>
-                            <p>{(price/100).toLocaleString("pt-BR", {style:"currency", currency:"BRL"})}</p>
-                        </PricePlus>
-                    </ModalInfo>
+                    <Wrapper>
+                        <img src={imageUrl} alt={name} onClick={()=>{setShowModal(true)}}></img>
+                        <ModalInfo>
+                                <FaTimes onClick={()=>{setShowModal(false)}}></FaTimes>
+                                <p>{name}</p>
+                                <p>Categoria: {categoryName}</p>
+                                <PricePlus>
+                                    {showCheck
+                                        ? <FaCheck></FaCheck>
+                                        :<FaCartPlus onClick={addToCart}></FaCartPlus>
+                                    }
+                                    <p>{(price/100).toLocaleString("pt-BR", {style:"currency", currency:"BRL"})}</p>
+                                </PricePlus>
+                        </ModalInfo>
+                    </Wrapper>
+                <p>Sinopse: "{description}"</p>
                 </ModalContent>
             </Modal>
-            <OpenInfo>
+            <OpenInfo onClick={()=>{setShowModal(true)}}>
                 <FaPlus></FaPlus>
                 <p>Informações</p>
             </OpenInfo>
             <CardInfo>
                 <p>{name}</p>
                 <PricePlus>
-                    <FaCartPlus></FaCartPlus>
+                    {showCheck
+                        ? <FaCheck></FaCheck>
+                        :<FaCartPlus onClick={addToCart}></FaCartPlus>
+                    }
                     <p>{(price/100).toLocaleString("pt-BR", {style:"currency", currency:"BRL"})}</p>
                 </PricePlus>
             </CardInfo>
@@ -53,8 +77,11 @@ const Card = styled.div`
     img{
         height: 215px;
     }
-    &:hover div:nth-child(2){
-        display: flex;
+    
+`
+
+const OpenInfo = styled.div`
+       display: flex;
         justify-content: center;
         align-items: center;
         width: 100px;
@@ -67,14 +94,6 @@ const Card = styled.div`
         border-bottom: 1px solid black;
         border-right: 1px solid black;
         font-size: 12px;
-        transition: .2s ;
-    }
-`
-
-const OpenInfo = styled.div`
-        width: 0px;
-        height:0px;
-        font-size: 0;
         svg{
             margin-right: 5px;
         }
@@ -86,6 +105,8 @@ const CardInfo = styled.div`
     flex-direction: column;
     padding: 0 5px;
     word-break: break-all;
+    font-size: 14px;
+    
     p{
         margin: 5px 0;
     }
@@ -100,22 +121,28 @@ const PricePlus = styled.div`
 `
 
 const ModalContent = styled.div`
-    width:100%;
     display: flex;
-    height: 100%;
+    flex-direction: column;
     padding: 10px;
-    img{
-        height:100%;
+    &>p:last-child{
+        color:white;
+        word-break:break-word;
+        text-align: justify;
+        margin-top: 10px;
+        border-top:1px solid white;
+        padding-top: 10px;
     }
 `
 
 const ModalInfo = styled.div`
     width: 100%;
-    height: 100%;
     padding-left: 10px;
     position: relative;
     color: white;
     & > p:nth-child(2){
+        margin-top: 0;
+        padding-right: 50px;
+        word-break:break-word;
         font-size:24px;
     }
     p{
@@ -124,7 +151,7 @@ const ModalInfo = styled.div`
     &>svg:nth-child(1){
         position: absolute;
         right: 10px;
-        top: 5px;
+        top: 0px;
         font-size: 22px;
     }
     div:last-child{
@@ -132,5 +159,11 @@ const ModalInfo = styled.div`
         bottom: 0;
         display: flex;
         align-items: center;
+    }
+`
+const Wrapper = styled.div`
+    display:flex;
+    img{
+        height:200px;
     }
 `
