@@ -33,7 +33,6 @@ export default function MangaCard({mangaInfo}){
             </OpenInfo>
             <CardInfo>
                 <p>{name}</p>
-                <p>Categoria: {categoryName}</p>
                 <PricePlus>
                     <FaCartPlus></FaCartPlus>
                     <p>{(price/100).toLocaleString("pt-BR", {style:"currency", currency:"BRL"})}</p>
@@ -47,12 +46,12 @@ const Card = styled.div`
     display: flex;
     flex-direction: column;
     background: white;
-    width: 125px;
-    margin: 20px;
+    width: 150px;
+    margin: 10px;
     position: relative;
     border-radius: 5px;
     img{
-        height: 175px;
+        height: 215px;
     }
     &:hover div:nth-child(2){
         display: flex;
@@ -82,7 +81,7 @@ const OpenInfo = styled.div`
 `
 
 const CardInfo = styled.div`
-    width:200px;
+    width:100%;
     display:flex;
     flex-direction: column;
     padding: 0 5px;
@@ -95,7 +94,7 @@ const CardInfo = styled.div`
 const PricePlus = styled.div`
     display: flex;
     svg{
-        font-size: 22px;;
+        font-size: 22px;
         margin-right: 10px;
     }
 `

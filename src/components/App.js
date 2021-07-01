@@ -22,7 +22,7 @@ export default function App(){
                 <Switch>
                     <Route path="/" exact component={SignIn}/>
                     <Route path="/sign-up" exact component={SignUp}/>
-                    <Route path="/store">
+                    <Route path="/main">
                         <Store>
                         </Store>
                         <Navbar>

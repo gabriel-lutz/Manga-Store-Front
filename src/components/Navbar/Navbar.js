@@ -1,36 +1,62 @@
 import styled from "styled-components"
 import {FaShoppingCart, FaSignOutAlt} from "react-icons/fa"
+import {useContext, useEffect} from "react"
+import UserContext from "../../contexts/UserContext"
+import axios from "axios"
+import {useHistory} from "react-router-dom"
 export default function Navbar(){
+    const {userInfo, setUserInfo} = useContext(UserContext)
+    const history = useHistory()
+
+    useEffect(()=>{
+        const config = {headers:{Authorization:`Bearer ${userInfo.token}`}}
+        const promisse = axios.get("http://localhost:4000/cart", config )
+        promisse.then(data=>{
+            setUserInfo({...userInfo, cart: data.data})
+        })
+        promisse.catch(()=>{
+            alert("algo deu errado")
+        })
+    })
+
+    function logout(){
+        const header = {
+            headers: {"Authorization": `${userInfo.token}`}
+        }
+        const promisse = axios.post("http://localhost:4000/logout", {}, header)
+        promisse.then(()=>{
+            localStorage.clear()
+            history.push('/')
+        })
+    }
+
     return(
         <Conteiner>
             <UserMenu>
                 <UserName>
-                    <p>Bem vindo, Fulano</p>
+                    <p>Bem vindo, {userInfo.user.name}</p>
                 </UserName>
                 <HorizontalSeparator></HorizontalSeparator>
                 <CartLogoutWrapper>
-                    <FaSignOutAlt></FaSignOutAlt>
+                    <FaSignOutAlt onClick={logout} style={{cursor:'pointer'}}></FaSignOutAlt>
                     <VerticalSeparator></VerticalSeparator>
-                    <FaShoppingCart></FaShoppingCart>
-                    <p>0 itens</p>
+                        <FaShoppingCart onClick={()=>history.push('/cart')}></FaShoppingCart>
+                        <p onClick={()=>history.push('/cart')}>{!userInfo.cart?.length && "0"} itens</p>
                 </CartLogoutWrapper>
-
             </UserMenu>
-            <SearchBar></SearchBar>
-            <PageName> Mangá Store </PageName>
+            <PageName> Mangá <br/>Store </PageName>
         </Conteiner>
     )
 }
 
 const Conteiner = styled.div`
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
     align-items: center;
     position: fixed;
     top: 0;
     left:0;
     right: 0;
-    padding: 0 50px;
     height: 100px;
     background: #151515;
     color:white;
@@ -46,7 +72,8 @@ const UserMenu = styled.div`
 `
 const PageName = styled.h1`
      font-family: 'Fredericka the Great', cursive;
-     font-size: 48px;
+     font-size: 30px;
+     word-break: break-all;
 `
 
 const CartLogoutWrapper = styled.div`
@@ -71,11 +98,4 @@ const VerticalSeparator = styled.div`
 
 const UserName = styled.div`
     font-size: 18px;
-`
-
-const SearchBar = styled.div`
-    width: 300px;
-    height: 30px;
-    background-color: white;
-    border-radius: 5px;
 `

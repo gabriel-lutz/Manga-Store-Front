@@ -11,9 +11,8 @@ export default function Store(){
         const promisse = axios.get("http://localhost:4000/allmangas")
         promisse.then(promisseData =>{
             setData(promisseData.data)
-            console.log(promisseData.data)
         })
-    }, [])
+    })
     return(
         <Conteiner>
             {data.length ? data.map(m=> <MangaCard key={m.id} mangaInfo={m}></MangaCard>): "Nehum mangá disponível no momento"}
