@@ -1,0 +1,36 @@
+@import url('https://fonts.googleapis.com/css2?family=Fredericka+the+Great&family=Roboto:ital,wght@0,700;1,400&display=swap');
+
+*{
+    box-sizing: border-box;
+}
+
+body{
+    background: #DBDBDB;
+    font-family: 'Roboto', sans-serif;
+}
+
+.Modal {
+    width: 597px;
+    min-height:350px;
+    max-height: 400px;
+    height: 400px;
+    background: #333;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    outline:none;
+  }
+
+  .Overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background: rgba(255, 255, 255, 0.9);
+    z-index: 2;
+  }
