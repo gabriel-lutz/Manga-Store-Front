@@ -28,6 +28,12 @@ export default function Navbar(){
             localStorage.clear()
             history.push('/')
         })
+        promisse.catch((data)=>{
+            if(data.response.status === 401){
+                localStorage.clear()
+                history.push('/')
+            }
+        })
     }
 
     return(
