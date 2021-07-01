@@ -16,16 +16,21 @@ export default function App(){
             ""
     );
 
+    const [cartItens,setCartItens]= useState(0)
+
+    
     return (
-        <UserContext.Provider value={{userInfo, setUserInfo}}>
+        <UserContext.Provider value={{userInfo, setUserInfo, cartItens,setCartItens}}>
             <Router>
                 <GlobalStyle/>
                 <Switch>
                     <Route path="/" exact component={SignIn}/>
                     <Route path="/sign-up" exact component={SignUp}/>
-                    <Route path="/cart" exact component={Cart}/>
+                    <Route path="/cart" exact>
+                        <Cart/>
+                    </Route>
                     <Route path="/main">
-                        <Store/>
+                        <Store />
                         <Navbar store={true}/>
                     </Route>
 

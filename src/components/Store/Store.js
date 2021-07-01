@@ -12,7 +12,7 @@ export default function Store(){
         promisse.then(promisseData =>{
             setData(promisseData.data)
         })
-    })
+    },[])
     return(
         <Conteiner>
             {data.length ? data.map(m=> <MangaCard key={m.id} mangaInfo={m}></MangaCard>): "Nehum mangá disponível no momento"}

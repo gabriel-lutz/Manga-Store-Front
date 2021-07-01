@@ -10,11 +10,12 @@ export default function MangaCard({mangaInfo}){
     const {id,name, price, categoryName, description, imageUrl} = mangaInfo
     const [showCheck, setShowCheck] = useState(false)
 
-    const {userInfo} = useContext(UserContext)
+    const {userInfo,cartItens,setCartItens} = useContext(UserContext)
     function addToCart(){
         const config = {headers:{Authorization:`${userInfo.token}`}}
         const promisse = axios.post(`http://localhost:4000/addproduct/${id}`,{}, config )
         promisse.then(()=>{
+            setCartItens(cartItens+1)
             setShowCheck(!showCheck)
             setTimeout(()=>{
                 setShowCheck(false)
