@@ -20,7 +20,7 @@ export default function Navbar({store}){
         promisse.catch(()=>{
             alert("algo deu errado")
         })
-    },[])
+    },[userInfo,setUserInfo])
 
     function logout(){
         const header = {

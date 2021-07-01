@@ -25,7 +25,7 @@ export default function Cart() {
             console.log(e)
             alert("could not connect to server")
         })
-    },[])
+    },[userInfo.token])
 
     function removeFromCart(cartId,name){
         if(!window.confirm(`Confirm removing ${name} from cart?`)){return}
