@@ -3,7 +3,7 @@ import styled from "styled-components"
 export default function HistoryMangaCard({manga}){
     return(
         <Conteiner>
-            <img src={manga.imageUrl}></img>
+            <img src={manga.imageUrl} alt={manga.categoryName}></img>
             <Info>
                 <h1>{manga.name}</h1>
                 <p> Category: {manga.categoryName}</p>

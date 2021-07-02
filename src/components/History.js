@@ -16,7 +16,6 @@ export default function History(){
             setHistoryData(data.data)
         })
     }, [userInfo.token])
-    console.log(historyData)
     return(
         <Conteiner>
             <Navbar store={false}></Navbar>
