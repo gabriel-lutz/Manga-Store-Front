@@ -23,7 +23,7 @@ export default function SignIn() {
         e.preventDefault()
         setRequesting(true)
         const body = {email,password}
-        axios.post("http://localhost:4000/sign-in",body).then(r=>{
+        axios.post(`${process.env.REACT_APP_API_BASE_URL}/sign-in`,body).then(r=>{
             localStorage.setItem('mangaStoreUserInfo', JSON.stringify(r.data));
             setUserInfo(r.data)
             setRequesting(false)

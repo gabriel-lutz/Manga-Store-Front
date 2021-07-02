@@ -12,12 +12,12 @@ export default function Store(){
     const [filteredString, setFilteredString] = useState("")
     const [filteredData, setFilteredData] = useState([])
     useEffect(()=>{
-        const promisse = axios.get(`http://localhost:4000/mangasall`)
+        const promisse = axios.get(`${process.env.REACT_APP_API_BASE_URL}/mangasall`)
         promisse.then(promisseData =>{
             setData(promisseData.data)
             setFilteredData(promisseData.data.filter(m=> m.name.toLowerCase().includes("".toLowerCase())))
         })
-        const request = axios.get(`http://localhost:4000/categories`)
+        const request = axios.get(`${process.env.REACT_APP_API_BASE_URL}/categories`)
         request.then(resp=>{
             setCategories(resp.data)
         })
@@ -27,7 +27,7 @@ export default function Store(){
     },[])
 
     function loadMangasByCategory(id){
-        const promisse = axios.get(`http://localhost:4000/mangas${id}`)
+        const promisse = axios.get(`${process.env.REACT_APP_API_BASE_URL}/mangas${id}`)
         promisse.then(promisseData =>{
             setData(promisseData.data)
             filterList("", true, promisseData.data)

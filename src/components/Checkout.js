@@ -16,7 +16,7 @@ export default function Checkout(){
             headers:{
                 Authorization:`Bearer ${userInfo.token}`
         }}
-        axios.get("http://localhost:4000/cart",config).then((r)=>{
+        axios.get(`${process.env.REACT_APP_API_BASE_URL}/cart`,config).then((r)=>{
             setUserCart(r.data)
         }).catch((e)=>{
             alert("could not connect to server")
@@ -30,7 +30,7 @@ export default function Checkout(){
             headers:{
                 Authorization:`Bearer ${userInfo.token}`
         }}
-        axios.post(`http://localhost:4000/check-out`,{checkoutData},config).then((r)=>{
+        axios.post(`${process.env.REACT_APP_API_BASE_URL}/check-out`,{checkoutData},config).then((r)=>{
             history.push('/main')
             alert("Purchase completed! Redirected do store!")
         }).catch((e)=>{

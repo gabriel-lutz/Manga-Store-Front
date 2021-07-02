@@ -11,7 +11,7 @@ export default function Navbar({store}){
 
     useEffect(()=>{
         const config = {headers:{Authorization:`Bearer ${userInfo.token}`}}
-        const promisse = axios.get("http://localhost:4000/cart", config )
+        const promisse = axios.get(`${process.env.REACT_APP_API_BASE_URL}/cart`, config )
         promisse.then(data=>{
             setCartItens(data.data.length)
         })
@@ -24,7 +24,7 @@ export default function Navbar({store}){
         const header = {
             headers: {"Authorization": `${userInfo.token}`}
         }
-        const promisse = axios.post("http://localhost:4000/logout", {}, header)
+        const promisse = axios.post(`${process.env.REACT_APP_API_BASE_URL}/logout`, {}, header)
         promisse.then(()=>{
             localStorage.clear()
             history.push('/')

@@ -17,7 +17,7 @@ export default function Cart() {
             headers:{
                 Authorization:`Bearer ${userInfo.token}`
         }}
-        axios.get("http://localhost:4000/cart",config).then((r)=>{
+        axios.get(`${process.env.REACT_APP_API_BASE_URL}/cart`,config).then((r)=>{
             setUserCart(r.data)
         }).catch((e)=>{
             alert("could not connect to server")
@@ -30,7 +30,7 @@ export default function Cart() {
             headers:{
                 Authorization:`Bearer ${userInfo.token}`
         }}
-        axios.delete(`http://localhost:4000/cart${cartId}`,config).then((r)=>{
+        axios.delete(`${process.env.REACT_APP_API_BASE_URL}/cart${cartId}`,config).then((r)=>{
             setUserCart(userCart.filter(i=> i.cartId===cartId? false:true))
         }).catch((e)=>{
             alert("could not connect to server")

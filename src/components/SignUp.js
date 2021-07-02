@@ -18,7 +18,7 @@ export default function SignUp() {
         if(password===passwordConfirmation){
             setRequesting(true)
             const body = {name,email,password}
-            axios.post("http://localhost:4000/sign-up",body).then(r=>{
+            axios.post(`${process.env.REACT_APP_API_BASE_URL}/sign-up`,body).then(r=>{
                 setRequesting(false)
                 history.push("/")
             }).catch(e=> {

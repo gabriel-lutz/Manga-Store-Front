@@ -11,7 +11,7 @@ export default function History(){
 
     useEffect(()=>{
         const config = {headers:{Authorization:`Bearer ${userInfo.token}`}}
-        const promisse = axios.get("http://localhost:4000/history", config)
+        const promisse = axios.get(`${process.env.REACT_APP_API_BASE_URL}/history`, config)
         promisse.then(data=>{
             setHistoryData(data.data)
         })
