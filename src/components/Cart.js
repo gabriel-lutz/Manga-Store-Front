@@ -37,40 +37,26 @@ export default function Cart() {
         })
     }   
 
-    function checkout(){
-        if(!window.confirm(`Confirm purchase of ${userCart.length} itens for R$ ${String(userCart.reduce((t,i)=>t+i.price,0)/100).replace(".",",")}?`)){return}
-        const config = {
-            headers:{
-                Authorization:`Bearer ${userInfo.token}`
-        }}
-        axios.post(`http://localhost:4000/check-out`,{},config).then((r)=>{
-            history.push('/main')
-            alert("Purchase completed! Redirected do store!")
-        }).catch((e)=>{
-            alert("Ocorreu um erro!")
-        })
-    }
-
     return (
         <>
-            <Navbar store={false}/>
-            <Wrapper>
-                <h1>YOUR CART</h1>
-                {userCart.map(i=> <CartItem key={i.cartId} cartId={i.cartId} name={i.name} cover={i.imageUrl} category={i.categoryName} price={String(i.price/100).replace(".",",")} removeFromCart={removeFromCart}/>)}
-                {userCart.length?
-                    <Footer>
-                        <ConfirmButton onClick={()=>checkout()}>
-                            <p>Total: R$ {String(userCart.reduce((t,i)=>t+i.price,0)/100).replace(".",",")}</p>
-                            <span>CONFIRM</span>
-                        </ConfirmButton>
-                    </Footer>:
-                    <>
-                        <p>You dont have any itens in your cart!</p>
-                        <p>click <span onClick={()=>history.push('/main')}>here</span> to go back to the store</p>
-                        
-                    </>
-                }
-            </Wrapper>
+        <Navbar store={false}/>
+        <Wrapper>
+            <h1>YOUR CART</h1>
+            {userCart.map(i=> <CartItem key={i.cartId} cartId={i.cartId} name={i.name} cover={i.imageUrl} category={i.categoryName} price={String(i.price/100).replace(".",",")} removeFromCart={removeFromCart}/>)}
+            {userCart.length?
+                <Footer>
+                    <ConfirmButton onClick={()=>history.push("/checkout")}>
+                        <p>Total: R$ {String(userCart.reduce((t,i)=>t+i.price,0)/100).replace(".",",")}</p>
+                        <span>CHECKOUT</span>
+                    </ConfirmButton>
+                </Footer>:
+                <>
+                    <p>You dont have any itens in your cart!</p>
+                    <p>click <span onClick={()=>history.push('/main')}>here</span> to go back to the store</p>
+                    
+                </>
+            }
+        </Wrapper>
         </>
     )
 }
