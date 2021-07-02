@@ -17,12 +17,12 @@ export default function HistoryCard({historyEvent}){
         <Conteiner onClick={display}>
             <p>Sale date: {dayjs(date).format('DD/MM/YYYY')} - {(price/100).toLocaleString("pt-BR", {style:"currency", currency:"BRL"})}</p>
             {show
-            ?<FaChevronUp></FaChevronUp>
-            :<FaChevronDown></FaChevronDown>
+                ?<FaChevronUp></FaChevronUp>
+                :<FaChevronDown></FaChevronDown>
             }
             {show
-            ?historyEvent.map((h, i)=><HistoryMangaCard key={i} manga={h}/>)
-            : ""
+                ?historyEvent.map((h, i)=><HistoryMangaCard key={i} manga={h}/>)
+                : ""
             }
         </Conteiner>
 

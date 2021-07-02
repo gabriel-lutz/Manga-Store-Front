@@ -36,7 +36,7 @@ export default function MangaCard({mangaInfo}){
                         <ModalInfo>
                                 <FaTimes onClick={()=>{setShowModal(false)}}></FaTimes>
                                 <p>{name}</p>
-                                <p>Categoria: {categoryName}</p>
+                                <p>Category: {categoryName}</p>
                                 <PricePlus>
                                     {showCheck
                                         ? <FaCheck></FaCheck>
@@ -46,12 +46,12 @@ export default function MangaCard({mangaInfo}){
                                 </PricePlus>
                         </ModalInfo>
                     </Wrapper>
-                <p>Sinopse: "{description}"</p>
+                <p>Sinopsys: "{description}"</p>
                 </ModalContent>
             </Modal>
             <OpenInfo onClick={()=>{setShowModal(true)}}>
                 <FaPlus></FaPlus>
-                <p>Informações</p>
+                <p>More info</p>
             </OpenInfo>
             <CardInfo>
                 <p>{name}</p>

@@ -20,7 +20,7 @@ export default function History(){
         <Conteiner>
             <Navbar store={false}></Navbar>
             <h1>SALE HISTORY</h1>
-            {historyData?.length ? historyData.map((h, i) => <HistoryCard key={i} historyEvent={h}/>) : <p>"nenhuma compra ainda"</p> }
+            {historyData?.length ? historyData.map((h, i) => <HistoryCard key={i} historyEvent={h}/>) : <p>You don`t have any purchases</p> }
         </Conteiner>
     )
 

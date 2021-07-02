@@ -41,7 +41,7 @@ export default function Navbar({store}){
         <Conteiner>
             <UserMenu>
                 <UserName>
-                    <p>Bem vindo, {userInfo.user.name}</p>
+                    <p>Welcome, {userInfo.user.name}</p>
                 </UserName>
                 <HorizontalSeparator></HorizontalSeparator>
                 <CartLogoutWrapper>
@@ -52,9 +52,9 @@ export default function Navbar({store}){
                         {store?
                             <>
                                 <FaShoppingCart onClick={()=>history.push('/cart')}></FaShoppingCart>
-                                <p onClick={()=>history.push('/cart')}>{cartItens} itens</p>
+                                <p onClick={()=>history.push('/cart')}>{cartItens}</p>
                             </>:
-                            <p onClick={()=>history.push('/main')}>Back to store</p>
+                            <p onClick={()=>history.push('/main')}>Store</p>
                         }
                 </CartLogoutWrapper>
             </UserMenu>
