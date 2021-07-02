@@ -55,7 +55,3 @@ const TakeOut= styled.div`
     display: flex;
     flex-direction: column;
 `
-
-// #DBDBDB => plano de fundo
-// #474747 => botao e o texto em baixo do botao
-// #696969 => placeholder

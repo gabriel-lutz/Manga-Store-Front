@@ -10,15 +10,13 @@ import Cart from "./Cart"
 import Checkout from "./Checkout"
 
 export default function App(){
+    const [cartItens,setCartItens]= useState(0)
     const [userInfo, setUserInfo] = useState(
         JSON.parse(localStorage.getItem('mangaStoreUserInfo'))!==null?
             JSON.parse(localStorage.getItem('mangaStoreUserInfo')):
             ""
     );
 
-    const [cartItens,setCartItens]= useState(0)
-
-    
     return (
         <UserContext.Provider value={{userInfo, setUserInfo, cartItens,setCartItens}}>
             <Router>

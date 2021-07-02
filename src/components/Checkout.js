@@ -11,19 +11,14 @@ export default function Checkout(){
     const [checkoutData, setCheckoutData] = useState()
     const history = useHistory()
 
-    
-
     useEffect(()=>{
         const config = {
             headers:{
                 Authorization:`Bearer ${userInfo.token}`
         }}
-        console.log("aqui")
         axios.get("http://localhost:4000/cart",config).then((r)=>{
-            console.log(r)
             setUserCart(r.data)
         }).catch((e)=>{
-            console.log(e)
             alert("could not connect to server")
         })
     },[userInfo.token])
@@ -31,7 +26,6 @@ export default function Checkout(){
     function checkout(e){
         e.preventDefault()
         if(!window.confirm(`Confirm purchase of ${userCart.length} itens for R$ ${String(userCart.reduce((t,i)=>t+i.price,0)/100).replace(".",",")}?`)){return}
-        
         const config = {
             headers:{
                 Authorization:`Bearer ${userInfo.token}`
@@ -73,10 +67,10 @@ export default function Checkout(){
                     onChange={e =>{ setCheckoutData({...checkoutData, creditCardNumber: e.target.value})}}>
                 </Input>
                 <Footer>
-                    {      checkoutData?.deliverName?.length > 3 
-                        && checkoutData.deliverPhoneNumber?.length > 8 
-                        && checkoutData.deliverAddress?.length > 5 
-                        && checkoutData.creditCardNumber?.length >4 
+                    {checkoutData?.deliverName?.length > 3 
+                    && checkoutData.deliverPhoneNumber?.length > 8 
+                    && checkoutData.deliverAddress?.length > 5 
+                    && checkoutData.creditCardNumber?.length >4 
                     ?<ConfirmButton onClick={checkout}>
                         <p>Total: R$ {String(userCart.reduce((t,i)=>t+i.price,0)/100).replace(".",",")}</p>
                         <span>CONFIRM</span>

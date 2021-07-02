@@ -17,29 +17,22 @@ export default function Cart() {
             headers:{
                 Authorization:`Bearer ${userInfo.token}`
         }}
-        console.log("aqui")
         axios.get("http://localhost:4000/cart",config).then((r)=>{
-            console.log(r)
             setUserCart(r.data)
         }).catch((e)=>{
-            console.log(e)
             alert("could not connect to server")
         })
     },[userInfo.token])
 
     function removeFromCart(cartId,name){
         if(!window.confirm(`Confirm removing ${name} from cart?`)){return}
-
         const config = {
             headers:{
                 Authorization:`Bearer ${userInfo.token}`
         }}
-        console.log(config)
         axios.delete(`http://localhost:4000/cart${cartId}`,config).then((r)=>{
-            console.log(r)
             setUserCart(userCart.filter(i=> i.cartId===cartId? false:true))
         }).catch((e)=>{
-            console.log(e)
             alert("could not connect to server")
         })
     }   

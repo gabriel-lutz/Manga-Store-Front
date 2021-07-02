@@ -16,7 +16,6 @@ export default function Store(){
         const request = axios.get(`http://localhost:4000/categories`)
         request.then(resp=>{
             setCategories(resp.data)
-            console.log(resp.data)
         })
         request.catch(()=>{
             alert(`algo deu errado`)
@@ -36,10 +35,10 @@ export default function Store(){
         <Categories>
                 <p onClick={()=>loadMangasByCategory("all")}>All</p>
                 {categories.map(i=><p key={i.id} onClick={()=>loadMangasByCategory(i.id)}>{i.name}</p>)}
-        </Categories>
-        <Conteiner>
-            {data.length ? data.map(m=> <MangaCard key={m.id} mangaInfo={m}></MangaCard>): "Nehum mangá disponível no momento"}
-        </Conteiner>
+            </Categories>
+            <Conteiner>
+                {data.length ? data.map(m=> <MangaCard key={m.id} mangaInfo={m}></MangaCard>): "Nehum mangá disponível no momento"}
+            </Conteiner>
         </>
     )
 }

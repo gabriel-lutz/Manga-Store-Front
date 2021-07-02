@@ -29,11 +29,9 @@ export default function SignIn() {
             setRequesting(false)
             history.push("/main")
         }).catch(e=> {
-            console.log(e)
             setRequesting(false)
         })
     }
-
 
     return (
         <Wrapper>

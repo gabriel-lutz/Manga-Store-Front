@@ -36,7 +36,7 @@ export default function Navbar({store}){
             }
         })
     }
-    //<p onClick={()=>history.push('/cart')}>{!userInfo.cart?.length && "0"} itens</p>
+    
     return(
         <Conteiner>
             <UserMenu>
@@ -75,17 +75,18 @@ const Conteiner = styled.div`
     z-index:2;
     box-shadow: 0 0px 10px #474747;
 `
+
 const UserMenu = styled.div`
     display: flex;
     flex-direction: column;
     height: 100%;
     justify-content: space-evenly;
-
 `
+
 const PageName = styled.h1`
-     font-family: 'Fredericka the Great', cursive;
-     font-size: 30px;
-     word-break: break-all;
+    font-family: 'Fredericka the Great', cursive;
+    font-size: 30px;
+    word-break: break-all;
 `
 
 const CartLogoutWrapper = styled.div`
@@ -102,6 +103,7 @@ const HorizontalSeparator = styled.div`
     width: 100%;
     border: 1px solid white;
 `
+
 const VerticalSeparator = styled.div`
     border: 1px solid white;
     height: 20px;

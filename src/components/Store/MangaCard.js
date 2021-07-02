@@ -71,33 +71,32 @@ const Card = styled.div`
     display: flex;
     flex-direction: column;
     background: white;
-    width: 150px;
+    width: 130px;
     margin: 10px;
     position: relative;
     border-radius: 5px;
     img{
-        height: 215px;
+        height: 190px;
     }
-    
 `
 
 const OpenInfo = styled.div`
-       display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 100px;
-        height:20px;
-        background: white;
-        position: absolute;
-        border-bottom-right-radius: 5px;
-        top: 0;
-        left: 0;
-        border-bottom: 1px solid black;
-        border-right: 1px solid black;
-        font-size: 12px;
-        svg{
-            margin-right: 5px;
-        }
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100px;
+    height:20px;
+    background: white;
+    position: absolute;
+    border-bottom-right-radius: 5px;
+    top: 0;
+    left: 0;
+    border-bottom: 1px solid black;
+    border-right: 1px solid black;
+    font-size: 12px;
+    svg{
+        margin-right: 5px;
+    }
 `
 
 const CardInfo = styled.div`
@@ -107,7 +106,6 @@ const CardInfo = styled.div`
     padding: 0 5px;
     word-break: break-all;
     font-size: 14px;
-    
     p{
         margin: 5px 0;
     }
@@ -162,6 +160,7 @@ const ModalInfo = styled.div`
         align-items: center;
     }
 `
+
 const Wrapper = styled.div`
     display:flex;
     img{

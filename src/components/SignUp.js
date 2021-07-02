@@ -22,7 +22,6 @@ export default function SignUp() {
                 setRequesting(false)
                 history.push("/")
             }).catch(e=> {
-                console.log(e)
                 setRequesting(false)
             })
         }else{
