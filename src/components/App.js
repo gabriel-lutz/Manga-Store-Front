@@ -10,15 +10,13 @@ import SignIn from "./SignIn"
 import Cart from "./Cart"
 
 export default function App(){
+    const [cartItens,setCartItens]= useState(0)
     const [userInfo, setUserInfo] = useState(
         JSON.parse(localStorage.getItem('mangaStoreUserInfo'))!==null?
             JSON.parse(localStorage.getItem('mangaStoreUserInfo')):
             ""
     );
 
-    const [cartItens,setCartItens]= useState(0)
-
-    
     return (
         <UserContext.Provider value={{userInfo, setUserInfo, cartItens,setCartItens}}>
             <Router>
@@ -33,7 +31,6 @@ export default function App(){
                         <Store />
                         <Navbar store={true}/>
                     </Route>
-
                 </Switch>
             </Router>
         </UserContext.Provider>
