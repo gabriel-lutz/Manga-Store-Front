@@ -8,7 +8,7 @@ import SignUp from "./SignUp"
 import SignIn from "./SignIn"
 import Cart from "./Cart"
 import Checkout from "./Checkout"
-
+import History from "./History"
 export default function App(){
     const [cartItens,setCartItens]= useState(0)
     const [userInfo, setUserInfo] = useState(
@@ -27,6 +27,7 @@ export default function App(){
                     <Route path="/cart" exact component={Cart}/>
                     <Route path="/main" exact component={Store}/>
                     <Route path="/checkout" exact component={Checkout}/>
+                    <Route path="/history" exact component={History}/>
                 </Switch>
             </Router>
         </UserContext.Provider>
