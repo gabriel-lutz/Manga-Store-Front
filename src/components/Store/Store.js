@@ -15,7 +15,7 @@ export default function Store(){
         const promisse = axios.get(`http://localhost:4000/mangasall`)
         promisse.then(promisseData =>{
             setData(promisseData.data)
-            filterList("", true, promisseData.data)
+            setFilteredData(promisseData.data.filter(m=> m.name.toLowerCase().includes("".toLowerCase())))
         })
         const request = axios.get(`http://localhost:4000/categories`)
         request.then(resp=>{
@@ -53,7 +53,7 @@ export default function Store(){
             <Wrapper>    
                 <DebounceInput
                     element={Search}
-                    minLength={2}
+                    minLength={"2"}
                     debounceTimeout={300}
                     onChange={e=>filterList(e, false)}
                     placeholder="Filter by name..."
