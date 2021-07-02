@@ -38,7 +38,7 @@ export default function Checkout(){
         })
     }
 
-
+    console.log(checkoutData)
     return(
         <>
             <Navbar></Navbar>

@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import {FaShoppingCart, FaSignOutAlt} from "react-icons/fa"
+import {FaShoppingCart, FaSignOutAlt, FaListUl} from "react-icons/fa"
 import {useContext, useEffect} from "react"
 import UserContext from "../../contexts/UserContext"
 import axios from "axios"
@@ -47,12 +47,14 @@ export default function Navbar({store}){
                 <CartLogoutWrapper>
                     <FaSignOutAlt onClick={logout} style={{cursor:'pointer'}}></FaSignOutAlt>
                     <VerticalSeparator></VerticalSeparator>
+                    <FaListUl onClick={()=>{history.push("/history")}}></FaListUl>
+                    <VerticalSeparator></VerticalSeparator>
                         {store?
                             <>
                                 <FaShoppingCart onClick={()=>history.push('/cart')}></FaShoppingCart>
                                 <p onClick={()=>history.push('/cart')}>{cartItens} itens</p>
                             </>:
-                            <p onClick={()=>history.push('/main')}>Voltar para loja</p>
+                            <p onClick={()=>history.push('/main')}>Back to store</p>
                         }
                 </CartLogoutWrapper>
             </UserMenu>
