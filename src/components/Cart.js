@@ -44,22 +44,6 @@ export default function Cart() {
         })
     }   
 
-    function checkout(){
-        if(!window.confirm(`Confirm purchase of ${userCart.length} itens for R$ ${String(userCart.reduce((t,i)=>t+i.price,0)/100).replace(".",",")}?`)){return}
-        
-        const config = {
-            headers:{
-                Authorization:`Bearer ${userInfo.token}`
-        }}
-        axios.post(`http://localhost:4000/check-out`,{},config).then((r)=>{
-            console.log(r)
-            history.push('/main')
-            alert("Purchase completed! Redirected do store!")
-        }).catch((e)=>{
-            console.log(e)
-        })
-    }
-
     return (
         <>
         <Navbar store={false}/>
@@ -68,9 +52,9 @@ export default function Cart() {
             {userCart.map(i=> <CartItem key={i.cartId} cartId={i.cartId} name={i.name} cover={i.imageUrl} category={i.categoryName} price={String(i.price/100).replace(".",",")} removeFromCart={removeFromCart}/>)}
             {userCart.length?
                 <Footer>
-                    <ConfirmButton onClick={()=>checkout()}>
+                    <ConfirmButton onClick={()=>history.push("/checkout")}>
                         <p>Total: R$ {String(userCart.reduce((t,i)=>t+i.price,0)/100).replace(".",",")}</p>
-                        <span>CONFIRM</span>
+                        <span>CHECKOUT</span>
                     </ConfirmButton>
                 </Footer>:
                 <>

@@ -2,7 +2,7 @@ import styled from "styled-components"
 import axios from "axios"
 import { useEffect, useState } from "react"
 import MangaCard from "./MangaCard"
-
+import Navbar from "../Navbar/Navbar"
 
 export default function Store(){
     const [data, setData] = useState([])
@@ -32,6 +32,7 @@ export default function Store(){
 
     return(
         <>
+        <Navbar store={true}/>
         <Categories>
                 <p onClick={()=>loadMangasByCategory("all")}>All</p>
                 {categories.map(i=><p key={i.id} onClick={()=>loadMangasByCategory(i.id)}>{i.name}</p>)}
@@ -63,11 +64,16 @@ const Categories = styled.div`
     border-bottom-right-radius: 10px;
     display:flex;
     align-items: center;
-    justify-content: space-around;
-    flex-wrap: wrap;
-    gap:5px;
+    justify-content: space-between;
+    gap:10px;
     padding:5px 10px;
     box-shadow: 0 0px 10px #474747;
+    overflow-x: scroll;
     z-index: 1;
     font-size: 13px;
+    color:white;
+    &::-webkit-scrollbar{
+        display:none;
+    }
+
 `
